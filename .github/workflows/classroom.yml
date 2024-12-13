@@ -21,6 +21,7 @@ jobs:
         setup-command: ''
         command: pip install -r requirements.txt
         timeout: 10
+        max-score: 20
     - name: All test cases
       id: all-test-cases
       uses: classroom-resources/autograding-command-grader@v1
@@ -29,6 +30,7 @@ jobs:
         setup-command: ''
         command: python run_autograder.py
         timeout: 10
+        max-score: 80
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
