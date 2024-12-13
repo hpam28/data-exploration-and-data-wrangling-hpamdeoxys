@@ -49,9 +49,9 @@ def get_nickname(df):
         
         # Update the 'nickname' column in the dataframe
         df.at[index, 'nickname'] = nickname
-    nickname_df = pd.DataFrame(df[['name', 'nickname']])
-    print(nickname_df)
-    nickname_df.to_csv('nicknames.csv', index=False)
+    student_output_df = pd.DataFrame(df[['name', 'nickname']])
+    print(student_output_df)
+    student_output_df.to_csv('student_output.csv', index=False)
 
 
     return df
