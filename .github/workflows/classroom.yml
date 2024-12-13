@@ -21,18 +21,30 @@ jobs:
         setup-command: ''
         command: pip install -r requirements.txt
         timeout: 10
-    - name: All test cases
-      id: all-test-cases
+        max-score: 20
+    - name: Score File
+      id: score-file
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: All test cases
+        test-name: Score File
+        setup-command: ''
+        command: python score_assignment.py
+        timeout: 10
+        max-score: 40
+    - name: Pytest
+      id: pytest
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Pytest
         setup-command: ''
         command: python run_autograder.py
         timeout: 10
+        max-score: 40
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         LIBRARIES_RESULTS: "${{steps.libraries.outputs.result}}"
-        ALL-TEST-CASES_RESULTS: "${{steps.all-test-cases.outputs.result}}"
+        SCORE-FILE_RESULTS: "${{steps.score-file.outputs.result}}"
+        PYTEST_RESULTS: "${{steps.pytest.outputs.result}}"
       with:
-        runners: libraries,all-test-cases
+        runners: libraries,score-file,pytest
